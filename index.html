@@ -70,16 +70,27 @@ h1 span,.section-title span{color:var(--accent);text-shadow:0 0 15px var(--accen
 .section-label{color:var(--accent);font-size:11px;letter-spacing:3px;text-transform:uppercase;margin-bottom:12px}
 .section-title{font-size:clamp(32px,4vw,52px);line-height:1.1;font-weight:700}
 
-/* Cardápio */
+/* Cardápio com Botão ao Lado do Preço */
 .menu-section{background:#040914;border-top:1px solid rgba(0, 216, 255, 0.15);border-bottom:1px solid rgba(0, 216, 255, 0.15)}
-.menu-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:24px;margin-top:40px}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:24px;margin-top:25px}
 .menu-card{border:1px solid rgba(0, 216, 255, 0.2);border-radius:20px;padding:18px;background:var(--card);transition:.4s;display:flex;flex-direction:column;justify-content:space-between}
 .menu-card:hover{transform:translateY(-6px);border-color:var(--accent);box-shadow:0 0 20px var(--accent-glow)}
 .menu-card img{width:100%;height:180px;object-fit:cover;border-radius:14px;margin-bottom:14px;border:1px solid rgba(0, 216, 255, 0.2)}
 .menu-card h3{font-size:20px;margin-bottom:6px;color:#fff}
 .menu-card p{color:var(--text-muted);font-size:13px;line-height:1.6;margin-bottom:14px;flex-grow:1}
-.price-tag{display:flex;justify-content:space-between;align-items:center;margin-top:auto;border-top:1px dashed rgba(0, 216, 255, 0.2);padding-top:12px}
-.price{font-size:18px;font-weight:bold;color:var(--accent)}
+
+.price-tag{display:flex;justify-content:space-between;align-items:center;margin-top:auto;border-top:1px dashed rgba(0, 216, 255, 0.2);padding-top:12px;gap:10px}
+.price{font-size:20px;font-weight:bold;color:var(--accent)}
+.btn-wp-small{background:var(--green);color:#fff;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:bold;display:inline-flex;align-items:center;gap:6px;box-shadow:0 0 10px rgba(34,197,94,0.3);transition:.3s}
+.btn-wp-small:hover{transform:scale(1.05);box-shadow:0 0 15px rgba(34,197,94,0.5)}
+
+/* Seção de Mapa com Talheres sobrepostos */
+.map-container{position:relative;width:100%;height:400px;border-radius:20px;overflow:hidden;border:2px solid var(--accent);box-shadow:0 0 25px var(--accent-glow);margin-top:30px}
+.map-iframe{width:100%;height:100%;border:0;filter:invert(90%) hue-rotate(180deg) contrast(120%)}
+.map-overlay-pin{position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);pointer-events:none;z-index:10;display:flex;flex-direction:column;align-items:center}
+.pin-badge{background:var(--card);border:2px solid var(--accent);padding:8px 16px;border-radius:20px;box-shadow:0 0 20px var(--accent-glow);display:flex;align-items:center;gap:8px;animation:float 3s ease-in-out infinite}
+.pin-badge span{font-size:22px}
+.pin-badge strong{color:#fff;font-size:13px}
 
 .cta{max-width:1250px;margin:0 auto 90px;padding:0 5%}
 .cta-box{border-radius:28px;border:1px solid var(--accent);background:radial-gradient(circle at 50% 50%,#001a33,#030712);padding:60px 30px;text-align:center;box-shadow:0 0 30px var(--accent-glow)}
@@ -93,6 +104,7 @@ footer{border-top:1px solid rgba(0, 216, 255, 0.2);padding:30px 5%;background:#0
 .whatsapp{position:fixed;right:22px;bottom:22px;width:58px;height:58px;border-radius:50%;background:var(--green);display:grid;place-items:center;z-index:99;box-shadow:0 8px 25px rgba(0,0,0,0.5)}
 .whatsapp svg{width:28px;height:28px;fill:white}
 
+@keyframes float{0%,100%{transform:translate(-50%, -50%)}50%{transform:translate(-50%, -60%)}}
 @media(max-width:900px){.nav-links{display:none}.hero-inner{grid-template-columns:1fr}.info-grid{grid-template-columns:1fr}.info-item{border-right:0;border-bottom:1px solid rgba(0, 216, 255, 0.15)}}
 @media(max-width:600px){.footer-inner{flex-direction:column;gap:12px;text-align:center}}
 </style>
@@ -149,7 +161,7 @@ footer{border-top:1px solid rgba(0, 216, 255, 0.2);padding:30px 5%;background:#0
 <section class="content menu-section" id="cardapio">
   <div class="section-label">Nosso Cardápio</div>
   <h2 class="section-title">Opções para <span>todos os momentos</span></h2>
-  <p class="section-subtitle" style="margin-bottom: 20px;">Pratos individuais, refeições completas, lanches e bebidas geladas.</p>
+  <p class="section-subtitle">Escolha o seu prato e clique no botão para pedir direto no WhatsApp!</p>
 
   <!-- Categoria: Pratos Principais -->
   <h3 style="color: var(--accent); margin-top: 40px; font-size: 22px;">🍛 Pratos Principais & Almoço</h3>
@@ -161,8 +173,8 @@ footer{border-top:1px solid rgba(0, 216, 255, 0.2);padding:30px 5%;background:#0
         <p>Arroz, feijão caseiro, bife acebolado ou frango grelhado, batata frita e salada da horta.</p>
       </div>
       <div class="price-tag">
-        <span class="price">R$ 28,00</span>
-        <a href="https://wa.me/5544997484590?text=Quero%20pedir%20o%20PF%20Comercial" class="btn btn-outline" style="padding: 6px 12px; font-size: 11px;">Pedir</a>
+        <span class="price">R$ 28,90</span>
+        <a href="https://wa.me/5544997484590?text=Olá!%20Gostaria%20de%20pedir:%20PF%20Comercial%20Esplanada%20(R$%2028,90)" target="_blank" class="btn-wp-small">💬 Pedir no WhatsApp</a>
       </div>
     </div>
 
@@ -170,11 +182,11 @@ footer{border-top:1px solid rgba(0, 216, 255, 0.2);padding:30px 5%;background:#0
       <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=500&q=80" alt="Churrasco com Acompanhamentos">
       <div>
         <h3>Alcatra Grelhada na Chapa</h3>
-        <p>Acompanha mandioca cozinha na manteiga de garrafa, farofa da casa e vinagrete fresco.</p>
+        <p>Acompanha mandioca cozida na manteiga de garrafa, farofa da casa e vinagrete fresco.</p>
       </div>
       <div class="price-tag">
-        <span class="price">R$ 42,00</span>
-        <a href="https://wa.me/5544997484590?text=Quero%20pedir%20Alcatra%20Grelhada" class="btn btn-outline" style="padding: 6px 12px; font-size: 11px;">Pedir</a>
+        <span class="price">R$ 42,50</span>
+        <a href="https://wa.me/5544997484590?text=Olá!%20Gostaria%20de%20pedir:%20Alcatra%20Grelhada%20na%20Chapa%20(R$%2042,50)" target="_blank" class="btn-wp-small">💬 Pedir no WhatsApp</a>
       </div>
     </div>
 
@@ -186,7 +198,7 @@ footer{border-top:1px solid rgba(0, 216, 255, 0.2);padding:30px 5%;background:#0
       </div>
       <div class="price-tag">
         <span class="price">R$ 35,00</span>
-        <a href="https://wa.me/5544997484590?text=Quero%20pedir%20a%20Feijoada" class="btn btn-outline" style="padding: 6px 12px; font-size: 11px;">Pedir</a>
+        <a href="https://wa.me/5544997484590?text=Olá!%20Gostaria%20de%20pedir:%20Feijoada%20Individual%20(R$%2035,00)" target="_blank" class="btn-wp-small">💬 Pedir no WhatsApp</a>
       </div>
     </div>
   </div>
@@ -202,7 +214,7 @@ footer{border-top:1px solid rgba(0, 216, 255, 0.2);padding:30px 5%;background:#0
       </div>
       <div class="price-tag">
         <span class="price">R$ 16,00</span>
-        <a href="https://wa.me/5544997484590?text=Quero%20pedir%20o%20Combo%20Cafe" class="btn btn-outline" style="padding: 6px 12px; font-size: 11px;">Pedir</a>
+        <a href="https://wa.me/5544997484590?text=Olá!%20Gostaria%20de%20pedir:%20Combo%20Café%20na%20Estrada%20(R$%2016,00)" target="_blank" class="btn-wp-small">💬 Pedir no WhatsApp</a>
       </div>
     </div>
 
@@ -213,8 +225,8 @@ footer{border-top:1px solid rgba(0, 216, 255, 0.2);padding:30px 5%;background:#0
         <p>Hambúrguer de 180g, queijo prato derretido, bacon crocante, salada e maionese especial.</p>
       </div>
       <div class="price-tag">
-        <span class="price">R$ 26,00</span>
-        <a href="https://wa.me/5544997484590?text=Quero%20pedir%20o%20Burguer%20Esplanada" class="btn btn-outline" style="padding: 6px 12px; font-size: 11px;">Pedir</a>
+        <span class="price">R$ 26,90</span>
+        <a href="https://wa.me/5544997484590?text=Olá!%20Gostaria%20de%20pedir:%20Burguer%20Esplanada%20(R$%2026,90)" target="_blank" class="btn-wp-small">💬 Pedir no WhatsApp</a>
       </div>
     </div>
 
@@ -225,8 +237,8 @@ footer{border-top:1px solid rgba(0, 216, 255, 0.2);padding:30px 5%;background:#0
         <p>Laranja, Limão, Abacaxi com Hortelã ou Polpa de Maracujá batidos na hora.</p>
       </div>
       <div class="price-tag">
-        <span class="price">R$ 10,00</span>
-        <a href="https://wa.me/5544997484590?text=Quero%20pedir%20um%20Suco%20Natural" class="btn btn-outline" style="padding: 6px 12px; font-size: 11px;">Pedir</a>
+        <span class="price">R$ 9,90</span>
+        <a href="https://wa.me/5544997484590?text=Olá!%20Gostaria%20de%20pedir:%20Suco%20Natural%20500ml%20(R$%209,90)" target="_blank" class="btn-wp-small">💬 Pedir no WhatsApp</a>
       </div>
     </div>
   </div>
@@ -234,9 +246,17 @@ footer{border-top:1px solid rgba(0, 216, 255, 0.2);padding:30px 5%;background:#0
 
 <section class="content" id="localizacao">
   <div class="section-label">Onde Estamos</div>
-  <h2 class="section-title">Facilidade de acesso <span>na estrada</span></h2>
-  <div style="margin-top:30px; border-radius: 20px; overflow: hidden; border: 1px solid var(--accent);">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14608.213233877995!2d-52.3500!3d-24.1500!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjTCsDA5JzAwLjAiUyA1MsKwMjEnMDAuMCJX!5e0!3m2!1spt-BR!2sbr!4v1620000000000!5m2!1spt-BR!2sbr" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+  <h2 class="section-title">Nossa localização <span>no Brasil</span></h2>
+  <p class="section-subtitle">Localizado estrategicamente na BR-487 em Iretama - PR.</p>
+  
+  <div class="map-container">
+    <iframe class="map-iframe" src="https://maps.google.com/maps?q=Iretama%20Parana%20Brasil&t=&z=5&ie=UTF8&iwloc=&output=embed"></iframe>
+    <div class="map-overlay-pin">
+      <div class="pin-badge">
+        <span>🍴</span>
+        <strong>Restaurante Esplanada (Iretama - PR)</strong>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -246,7 +266,7 @@ footer{border-top:1px solid rgba(0, 216, 255, 0.2);padding:30px 5%;background:#0
     <h2>Faça seu pedido ou <span>venha nos visitar!</span></h2>
     <p>Estamos prontos para te atender com refeições saborosas e um ambiente aconchegante.</p>
     <div class="hero-buttons" style="justify-content:center">
-      <a href="https://wa.me/5544997484590" target="_blank" class="btn btn-blue">💬 Pedir no WhatsApp</a>
+      <a href="https://wa.me/5544997484590" target="_blank" class="btn btn-blue">💬 Abrir Atendimento no WhatsApp</a>
       <a href="tel:+5544997484590" class="btn btn-outline">📞 Ligar (44) 99748-4590</a>
     </div>
   </div>
@@ -269,5 +289,5 @@ const header=document.getElementById("header");
 window.addEventListener("scroll",()=>header.classList.toggle("scrolled",scrollY>30));
 </script>
 </body>
-  </html>
+        </html>
   
