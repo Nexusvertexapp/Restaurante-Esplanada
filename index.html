@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restaurante Esplanada | Iretama - PR</title>
+<style>
+:root {
+  --bg: #000000;
+  --card: #080d14;
+  --accent: #00bfff;
+  --accent-glow: rgba(0, 191, 255, 0.3);
+  --text-bright: #ffffff;
+  --text-muted: #8ab4f8;
+  --green: #20b957;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text-bright);font-family:Arial,sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+
+header{position:fixed;top:0;width:100%;z-index:100;padding:18px 5%;transition:.4s}
+header.scrolled{background:#000000ee;backdrop-filter:blur(18px);border-bottom:1px solid #00bfff33}
+
+.nav{max-width:1250px;margin:auto;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-mark{width:42px;height:42px;border:1px solid var(--accent);border-radius:50%;display:grid;place-items:center;color:var(--accent);font-family:Georgia;font-size:20px;box-shadow:0 0 10px var(--accent-glow)}
+.logo strong{display:block;font-family:Georgia;font-size:17px;color:#fff}
+.logo span{display:block;color:var(--accent);font-size:9px;letter-spacing:3px;margin-top:4px}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{font-size:13px;color:var(--text-muted)}
+.nav-links a:hover{color:var(--accent)}
+.nav-cta{border:1px solid var(--accent);padding:11px 18px;border-radius:30px;color:var(--accent)!important;box-shadow:0 0 10px var(--accent-glow)}
+
+.hero{min-height:100vh;display:flex;align-items:center;padding:130px 5% 70px;overflow:hidden;background:radial-gradient(circle at 80% 20%, #003366 0%, transparent 50%)}
+.hero-inner{max-width:1250px;width:100%;margin:auto;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:40px}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--accent);background:rgba(0,191,255,0.1);padding:8px 13px;border-radius:30px;color:var(--accent);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:24px}
+.dot{width:7px;height:7px;background:#39d878;border-radius:50%;box-shadow:0 0 12px #39d878}
+h1{font-family:Georgia,serif;font-size:clamp(48px,6vw,84px);line-height:.98;letter-spacing:-2px}
+h1 span,.section-title span{color:var(--accent);font-style:italic}
+.hero-description,.section-subtitle{color:var(--text-muted);line-height:1.8}
+.hero-description{max-width:540px;margin:27px 0 34px;font-size:16px}
+.hero-buttons{display:flex;gap:13px;flex-wrap:wrap}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:15px 22px;border-radius:9px;font-size:13px;font-weight:bold;transition:.3s}
+.btn-blue{background:linear-gradient(135deg,#00bfff,#0066cc);color:#fff;box-shadow:0 10px 25px rgba(0,191,255,0.4)}
+.btn-blue:hover{transform:translateY(-3px);box-shadow:0 15px 30px rgba(0,191,255,0.6)}
+.btn-outline{border:1px solid var(--accent);color:var(--accent);background:rgba(0,191,255,0.05)}
+.btn-outline:hover{background:rgba(0,191,255,0.2)}
+
+.hero-visual{min-height:570px;position:relative;display:grid;place-items:center}
+.hero-img-container{position:relative;width:100%;max-width:500px;height:400px;border-radius:20px;overflow:hidden;border:2px solid var(--accent);box-shadow:0 0 30px var(--accent-glow)}
+.hero-img-container img{width:100%;height:100%;object-fit:cover}
+
+.floating-card{position:absolute;right:0;bottom:20px;padding:15px 18px;background:rgba(8,13,20,0.9);border:1px solid var(--accent);backdrop-filter:blur(14px);border-radius:13px;box-shadow:0 10px 30px #000;animation:float 5s ease-in-out infinite}
+.floating-card small{color:var(--text-muted);font-size:10px;display:block;margin-bottom:4px}
+.floating-card strong{font-size:14px;color:var(--accent)}
+
+.info-strip{border-top:1px solid #00bfff33;border-bottom:1px solid #00bfff33;background:#050a10}
+.info-grid{max-width:1250px;margin:auto;display:grid;grid-template-columns:repeat(3,1fr)}
+.info-item{padding:27px 25px;display:flex;gap:14px;align-items:center;border-right:1px solid #00bfff33}
+.info-item:last-child{border:0}
+.info-icon{width:43px;height:43px;border-radius:50%;display:grid;place-items:center;background:rgba(0,191,255,0.1);border:1px solid var(--accent);color:var(--accent);flex-shrink:0}
+.info-item small{color:var(--text-muted);display:block;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:5px}
+.info-item strong{font-size:13px;color:#fff}
+
+.content{max-width:1250px;margin:auto;padding:110px 5%}
+.section-label{color:var(--accent);font-size:11px;letter-spacing:3px;text-transform:uppercase;margin-bottom:15px}
+.section-title{font-family:Georgia,serif;font-size:clamp(36px,4vw,55px);line-height:1.05;font-weight:500}
+.section-subtitle{max-width:580px;margin-top:18px}
+
+.experience-grid,.location-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;margin-top:55px}
+.experience-card{min-height:430px;border:1px solid #00bfff33;border-radius:22px;background:linear-gradient(135deg,rgba(0,191,255,0.05),var(--card));padding:35px;display:flex;flex-direction:column;justify-content:flex-end;transition:.4s;position:relative;overflow:hidden}
+.experience-card.large{min-height:500px}
+.experience-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.35;z-index:0;transition:.4s}
+.experience-card:hover img{opacity:0.5;transform:scale(1.03)}
+.experience-card-content{position:relative;z-index:1}
+
+.experience-card:hover,.mini-card:hover,.menu-card:hover{transform:translateY(-6px);border-color:var(--accent);box-shadow:0 0 15px var(--accent-glow)}
+.experience-card h3,.mini-card h3,.menu-card h3{font-family:Georgia,serif}
+.experience-card h3{font-size:34px;margin-bottom:12px;color:#fff}
+.experience-card p,.mini-card p,.menu-card p{color:var(--text-muted);line-height:1.7}
+
+.mini-grid{display:grid;gap:22px}
+.mini-card{border:1px solid #00bfff33;border-radius:22px;padding:30px;background:var(--card);min-height:238px;transition:.4s}
+.mini-icon,.menu-card .icon{font-size:29px;margin-bottom:22px;color:var(--accent)}
+.mini-card h3{font-size:25px;margin-bottom:9px;color:#fff}
+
+.menu-section{background:#03060a;border-top:1px solid #00bfff33;border-bottom:1px solid #00bfff33}
+.menu-content{max-width:1250px;margin:auto;padding:110px 5%}
+.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:50px}
+.menu-card{border:1px solid #00bfff33;border-radius:18px;padding:20px;background:var(--card);transition:.4s;overflow:hidden}
+.menu-card img{width:100%;height:160px;object-fit:cover;border-radius:12px;margin-bottom:15px;border:1px solid #00bfff33}
+.menu-card h3{font-size:22px;margin-bottom:10px;color:#fff}
+
+.location-card{border:1px solid #00bfff33;border-radius:22px;padding:35px;background:var(--card)}
+.address{margin:25px 0;color:var(--text-muted);line-height:1.7}
+.road-badge{display:inline-flex;padding:9px 13px;border-radius:30px;border:1px solid var(--accent);color:var(--accent);background:rgba(0,191,255,0.1);font-size:11px}
+.map-box{min-height:390px;border-radius:22px;border:1px solid #00bfff33;position:relative;overflow:hidden;background:var(--card);display:grid;place-items:center}
+.map-box img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.6}
+.map-pin{position:relative;z-index:2;width:68px;height:68px;border-radius:50% 50% 50% 0;background:linear-gradient(135deg,#00bfff,#0066cc);transform:rotate(-45deg);display:grid;place-items:center;box-shadow:0 0 25px var(--accent)}
+.map-pin span{transform:rotate(45deg);font-size:24px}
+
+.hours{margin-top:22px;border-top:1px solid #00bfff33}
+.hour-row{display:flex;justify-content:space-between;padding:13px 0;border-bottom:1px solid #00bfff33;color:var(--text-muted);font-size:13px}
+.hour-row span:last-child{color:var(--accent);font-weight:bold}
+
+.cta{max-width:1250px;margin:0 auto 90px;padding:0 5%}
+.cta-box{border-radius:28px;border:1px solid var(--accent);background:radial-gradient(circle at 50% 50%,#002244,#000);padding:75px;text-align:center;box-shadow:0 0 30px var(--accent-glow)}
+.cta-box h2{font-family:Georgia,serif;font-size:clamp(37px,5vw,60px);margin-bottom:16px}
+.cta-box p{color:var(--text-muted);max-width:600px;margin:0 auto 30px;line-height:1.7}
+
+footer{border-top:1px solid #00bfff33;padding:35px 5%;background:#000}
+.footer-inner{max-width:1250px;margin:auto;display:flex;justify-content:space-between}
+.footer-inner p{color:var(--text-muted);font-size:12px}
+.footer-phone{color:var(--accent);font-size:13px}
+.whatsapp{position:fixed;right:22px;bottom:22px;width:59px;height:59px;border-radius:50%;background:var(--green);display:grid;place-items:center;z-index:99;box-shadow:0 10px 35px #000}
+.whatsapp svg{width:29px;height:29px;fill:white}
+
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+@media(max-width:900px){.nav-links{display:none}.hero-inner,.experience-grid,.location-grid{grid-template-columns:1fr}.info-grid{grid-template-columns:1fr}.info-item{border-right:0;border-bottom:1px solid #00bfff33}.menu-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){h1{font-size:48px}.menu-grid{grid-template-columns:1fr}.cta-box{padding:50px 25px}.footer-inner{flex-direction:column;gap:12px;text-align:center}}
+</style>
+</head>
+<body>
+<header id="header">
+  <nav class="nav">
+    <a href="#" class="logo">
+      <div class="logo-mark">E</div>
+      <div><strong>Restaurante</strong><span>ESPLANADA</span></div>
+    </a>
+    <div class="nav-links">
+      <a href="#experiencia">Experiência</a>
+      <a href="#sabores">Sabores</a>
+      <a href="#localizacao">Localização</a>
+      <a href="#horarios">Horários</a>
+      <a href="https://wa.me/5544997484590" target="_blank" class="nav-cta">Fale conosco</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="eyebrow"><span class="dot"></span>Aberto hoje até 22:00</div>
+      <h1>Uma parada que <span>vale a viagem.</span></h1>
+      <p class="hero-description">Seja para uma refeição especial, uma pausa durante a viagem ou simplesmente para comer bem, o Restaurante Esplanada espera por você em Iretama, Paraná.</p>
+      <div class="hero-buttons">
+        <a href="https://www.google.com/maps/search/?api=1&query=Restaurante+Esplanada+Iretama+PR" target="_blank" class="btn btn-blue">📍 Como chegar</a>
+        <a href="https://wa.me/5544997484590" target="_blank" class="btn btn-outline">💬 Falar no WhatsApp</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-img-container">
+        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80" alt="Prato delicioso do restaurante">
+      </div>
+      <div class="floating-card">
+        <small>Localização</small>
+        <strong>BR-487 • Iretama/PR</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="info-strip">
+  <div class="info-grid">
+    <div class="info-item"><div class="info-icon">📍</div><div><small>Estamos aqui</small><strong>BR-487 • Iretama, PR</strong></div></div>
+    <div class="info-item"><div class="info-icon">🕐</div><div><small>Funcionamento</small><strong>Todos os dias • 06:00 – 22:00</strong></div></div>
+    <div class="info-item"><div class="info-icon">📞</div><div><small>Contato</small><strong>(44) 99748-4590</strong></div></div>
+  </div>
+</div>
+
+<section class="content" id="experiencia">
+  <div class="section-label">Experiência Esplanada</div>
+  <h2 class="section-title">Mais do que uma refeição.<br><span>Uma boa parada.</span></h2>
+  <p class="section-subtitle">Em meio à estrada, encontrar um lugar agradável para parar, respirar e fazer uma boa refeição faz toda a diferença.</p>
+  
+  <div class="experience-grid">
+    <div class="experience-card large">
+      <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80" alt="Ambiente do Restaurante">
+      <div class="experience-card-content">
+        <h3>Seu momento de pausa.</h3>
+        <p>Depois de quilômetros na estrada, nada melhor do que desacelerar por alguns minutos e aproveitar uma boa experiência à mesa.</p>
+      </div>
+    </div>
+    <div class="mini-grid">
+      <div class="mini-card">
+        <div class="mini-icon">🍽️</div>
+        <h3>Para comer bem</h3>
+        <p>Um ambiente pensado para você aproveitar sua refeição com tranquilidade.</p>
+      </div>
+      <div class="mini-card">
+        <div class="mini-icon">🚗</div>
+        <h3>Na sua rota</h3>
+        <p>Localizado na BR-487, uma opção prática para quem está passando pela região.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="menu-section" id="sabores">
+  <div class="menu-content">
+    <div class="section-label">Para todos os momentos</div>
+    <h2 class="section-title">Seu apetite merece<br><span>uma boa parada.</span></h2>
+    <p class="section-subtitle">Do café da manhã ao jantar, o Esplanada está aberto todos os dias para receber você.</p>
+    
+    <div class="menu-grid">
+      <div class="menu-card">
+        <img src="https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=500&q=80" alt="Café da manhã">
+        <h3>Café da manhã</h3>
+        <p>Comece o dia com uma pausa saborosa antes de seguir viagem.</p>
+      </div>
+      <div class="menu-card">
+        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=500&q=80" alt="Almoço">
+        <h3>Almoço</h3>
+        <p>Aquele momento para parar, descansar e recuperar as energias.</p>
+      </div>
+      <div class="menu-card">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=500&q=80" alt="Refeição">
+        <h3>Refeição</h3>
+        <p>Uma opção prática para quem está na estrada e quer comer bem.</p>
+      </div>
+      <div class="menu-card">
+        <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=500&q=80" alt="Café e Pausa">
+        <h3>Um café e uma pausa</h3>
+        <p>Às vezes, tudo o que você precisa é de alguns minutos para relaxar.</p>
+      </div>
+      <div class="menu-card">
+        <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=500&q=80" alt="Bebidas">
+        <h3>Para refrescar</h3>
+        <p>Faça uma pausa rápida antes de continuar seu caminho.</p>
+      </div>
+      <div class="menu-card">
+        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=500&q=80" alt="Jantar">
+        <h3>Jantar</h3>
+        <p>O dia ainda não acabou. Estamos esperando por você até 22h.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="content" id="localizacao">
+  <div class="section-label">Encontre o Esplanada</div>
+  <h2 class="section-title">Estamos no caminho<br><span>da sua próxima parada.</span></h2>
+  
+  <div class="location-grid">
+    <div class="location-card">
+      <div class="road-badge">🚗 BR-487</div>
+      <h3 style="font-family:Georgia;font-size:32px;margin-top:25px;color:#fff">Restaurante Esplanada</h3>
+      <p class="address">BR-487<br>Iretama - Paraná<br>CEP 87280-000</p>
+      <a href="https://www.google.com/maps/search/?api=1&query=Restaurante+Esplanada+Iretama+PR" target="_blank" class="btn btn-blue">📍 Abrir no Google Maps</a>
+    </div>
+    <div class="map-box">
+      <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=800&q=80" alt="Estrada / Mapa">
+      <div class="map-pin"><span>🍴</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="content" id="horarios">
+  <div class="section-label">Horário de funcionamento</div>
+  <h2 class="section-title">Pode chegar.<br><span>Estamos esperando.</span></h2>
+  
+  <div class="location-grid">
+    <div class="location-card">
+      <div class="info-icon">🕐</div>
+      <h3 style="font-family:Georgia;font-size:30px;margin-top:20px;color:#fff">Todos os dias</h3>
+      <p style="color:var(--text-muted);margin-top:10px;line-height:1.7">Funcionamos de domingo a sábado, das 06:00 às 22:00.</p>
+      <div class="hours">
+        <div class="hour-row"><span>Domingo</span><span>06:00 – 22:00</span></div>
+        <div class="hour-row"><span>Segunda-feira</span><span>06:00 – 22:00</span></div>
+        <div class="hour-row"><span>Terça-feira</span><span>06:00 – 22:00</span></div>
+        <div class="hour-row"><span>Quarta-feira</span><span>06:00 – 22:00</span></div>
+        <div class="hour-row"><span>Quinta-feira</span><span>06:00 – 22:00</span></div>
+        <div class="hour-row"><span>Sexta-feira</span><span>06:00 – 22:00</span></div>
+        <div class="hour-row"><span>Sábado</span><span>06:00 – 22:00</span></div>
+      </div>
+    </div>
+    
+    <div class="location-card" style="display:flex;flex-direction:column;justify-content:center;background:radial-gradient(circle at 80% 20%,rgba(0,191,255,0.15),transparent 50%),var(--card)">
+      <div class="section-label">Está na estrada?</div>
+      <h3 style="font-family:Georgia;font-size:42px;line-height:1.1;color:#fff">Faça uma pausa<br><span style="color:var(--accent);font-style:italic">no Esplanada.</span></h3>
+      <p style="color:var(--text-muted);line-height:1.8;margin:20px 0 28px">Salve nossa localização e venha nos visitar. Estamos na BR-487, em Iretama.</p>
+      <a href="https://www.google.com/maps/search/?api=1&query=Restaurante+Esplanada+Iretama+PR" target="_blank" class="btn btn-blue">Quero chegar até aí →</a>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="cta-box">
+    <div class="section-label">Restaurante Esplanada</div>
+    <h2>Sua próxima parada<br>pode ser <span style="color:var(--accent);font-style:italic">deliciosa.</span></h2>
+    <p>Na próxima vez que estiver passando pela BR-487, faça uma pausa. O Esplanada está em Iretama esperando por você.</p>
+    <div class="hero-buttons" style="justify-content:center">
+      <a href="https://www.google.com/maps/search/?api=1&query=Restaurante+Esplanada+Iretama+PR" target="_blank" class="btn btn-blue">📍 Como chegar</a>
+      <a href="tel:+5544997484590" class="btn btn-outline">📞 (44) 99748-4590</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <p>© 2026 Restaurante Esplanada • Iretama - PR</p>
+    <a href="tel:+5544997484590" class="footer-phone">(44) 99748-4590</a>
+  </div>
+</footer>
+
+<a href="https://wa.me/5544997484590" target="_blank" class="whatsapp" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M20.5 3.5A11.8 11.8 0 0 0 12 0C5.4 0 .1 5.4.1 11.9c0 2.1.5 4.1 1.6 5.9L0 24l6.3-1.6a11.8 11.8 0 0 0 5.7 1.5h.1c6.5 0 11.8-5.4 11.8-11.9 0-3.2-1.2-6.2-3.4-8.5Zm-8.4 18.2h-.1a9.9 9.9 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4a9.8 9.8 0 0 1-1.5-5.2c0-5.5 4.4-9.9 9.9-9.9 2.6 0 5.1 1 7 2.9a9.8 9.8 0 0 1 2.9 7c0 5.4-4.4 9.8-9.9 9.8Zm5.4-7.4c-.3-.1-1.8-.9-2-.9-.3-.1-.5-.2-.7.1-.2.3-.8 1-1 1.2-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.5c.2-.2.2-.3.3-.5.1-.2.1-.4 0-.5-.1-.2-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5H8c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.3-.6-.4Z"/></svg>
+</a>
+
+<script>
+const header=document.getElementById("header");
+window.addEventListener("scroll",()=>header.classList.toggle("scrolled",scrollY>30));
+
+const els=document.querySelectorAll(".experience-card,.mini-card,.menu-card,.location-card");
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.style.opacity=1;x.target.style.transform="translateY(0)";obs.unobserve(x.target)}}),{threshold:.12});
+els.forEach(x=>{x.style.opacity=0;x.style.transform="translateY(25px)";x.style.transition=".7s";obs.observe(x)});
+</script>
+</body>
+</html>
